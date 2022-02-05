@@ -9,7 +9,7 @@ from sklearn.metrics import confusion_matrix
 
 def experiment(dataset_name, network_name, subject, session_fold, print_detail=False, num_epochs=100, batch_size=16, learning_rate=1e-3):
     # Placeholding
-    if dataset_name == "GIST-MI":
+    if dataset_name == "GIST-MI": # for additional experiments
         num_output = 1
         num_channel = 64
         sfreq = 512
