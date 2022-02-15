@@ -2,15 +2,14 @@ import numpy as np
 import glob, re, mne, os.path, scipy.io
 from mne.filter import filter_data
 
-
+# Load dataset function
 def load_DATA(dataset_name, subject, session_fold):
     def load_dataset(subject, fold):
         """
         Saved after preprocessing
         (Laplacian filtering, baseline correction, band-pass filtering (4~40Hz), and Gaussian normalization)
         """
-        # path = "/home/ko/Desktop/pycharm-2018.3.5/projects/Data/GIST_MI/preprocessed/TIME_"
-        path = "/Datafast/wjko/GIST_MI/preprocessed/TIME_"
+        path = "Define/Your/Own/Path/"
         train_data = np.moveaxis(np.load(path + "cv%01d_tr_sub%02d.npy" % (fold, subject)), -1, 0)
         validation_data = np.moveaxis(np.load(path + "cv%01d_vl_sub%02d.npy" % (fold, subject)), -1, 0)
         test_data = np.moveaxis(np.load(path + "cv%01d_ts_sub%02d.npy" % (fold, subject)), -1, 0)
@@ -31,7 +30,7 @@ def load_DATA(dataset_name, subject, session_fold):
         Saved after preprocessing
         (Laplacian filtering, baseline correction, band-pass filtering (4~40Hz)
         """
-        path = "/Datafast/wjko/KU_SW_Lee/MI_Preprocessed/TIME_"
+        path = "Define/Your/Own/Path/"
         train_data = np.load(path + "Sess%02d_sub%02d_train.npy" % (session, subject))
         test_data = np.load(path + "Sess%02d_sub%02d_test.npy" % (session, subject))
         # Labels are one-hot encoded.
@@ -108,7 +107,7 @@ class callDataset():
         assert 0 < sessIdx < 3, "We only have session 1 and 2."
 
         self.sbjIdx, self.sessIdx = sbjIdx, sessIdx
-        self.path = "/home/ko/Desktop/pycharm-2018.3.5/projects/Data/KU_SW_Lee/preprocessed"
+        self.path = "Define/Your/Own/Path"
 
     def loadData(self):
         Xtr = np.load(self.path + "/TIME_Sess{:>02d}_sub{:>02d}_train.npy".format(self.sessIdx, self.sbjIdx))
