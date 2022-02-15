@@ -3,28 +3,7 @@ import glob, re, mne, os.path, scipy.io
 from mne.filter import filter_data
 
 # Load dataset function
-def load_DATA(dataset_name, subject, session_fold):
-    def load_dataset(subject, fold):
-        """
-        Saved after preprocessing
-        (Laplacian filtering, baseline correction, band-pass filtering (4~40Hz), and Gaussian normalization)
-        """
-        path = "Define/Your/Own/Path/"
-        train_data = np.moveaxis(np.load(path + "cv%01d_tr_sub%02d.npy" % (fold, subject)), -1, 0)
-        validation_data = np.moveaxis(np.load(path + "cv%01d_vl_sub%02d.npy" % (fold, subject)), -1, 0)
-        test_data = np.moveaxis(np.load(path + "cv%01d_ts_sub%02d.npy" % (fold, subject)), -1, 0)
-
-        train_data, validation_data, test_data = np.expand_dims(train_data, -1), np.expand_dims(validation_data,
-                                                                                                -1), np.expand_dims(
-            test_data, -1)
-
-        tmp1, tmp2, tmp3 = int(train_data.shape[0] / 2), int(validation_data.shape[0] / 2), int(test_data.shape[0] / 2)
-
-        train_label = np.concatenate((np.zeros((tmp1, 1)), np.ones((tmp1, 1))), 0)
-        valid_label = np.concatenate((np.zeros((tmp2, 1)), np.ones((tmp2, 1))), 0)
-        test_label = np.concatenate((np.zeros((tmp3, 1)), np.ones((tmp3, 1))), 0)
-        return train_data, train_label, validation_data, valid_label, test_data, test_label
-
+def load_DATA(subject, session_fold):
     def load_dataset_KU(subject, session):
         """
         Saved after preprocessing
@@ -50,32 +29,10 @@ def load_DATA(dataset_name, subject, session_fold):
         valid_label = train_label[:tmp, :]
         train_data = train_data[tmp:, :, :]
         train_label = train_label[tmp:, :]
-
-        # Gaussian normalization
-        mean = np.squeeze(np.mean(np.mean(train_data, 0), 1))
-        std = np.squeeze(np.std(np.std(train_data, 0), 1))
-
-        for channel in range(train_data.shape[1]):
-            train_data[:, channel, :] -= mean[channel]
-            train_data[:, channel, :] /= std[channel]
-            valid_data[:, channel, :] -= mean[channel]
-            valid_data[:, channel, :] /= std[channel]
-            test_data[:, channel, :] -= mean[channel]
-            test_data[:, channel, :] /= std[channel]
-
-        train_data, valid_data, test_data = np.expand_dims(train_data, -1), np.expand_dims(valid_data,
-                                                                                           -1), np.expand_dims(
-            test_data, -1)
-
         return train_data, train_label, valid_data, valid_label, test_data, test_label
 
     
-
-    if dataset_name == "GIST-MI":
-        train_eeg, train_label, valid_eeg, valid_label, test_eeg, test_label = load_dataset(subject=subject,
-                                                                                            fold=session_fold)
-    elif dataset_name == "KU-MI":
-        train_eeg, train_label, valid_eeg, valid_label, test_eeg, test_label = load_dataset_KU(subject=subject,
+    train_eeg, train_label, valid_eeg, valid_label, test_eeg, test_label = load_dataset_KU(subject=subject,
                                                                                             session=session_fold)
  
         # Gaussian Normalization
