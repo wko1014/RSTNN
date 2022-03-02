@@ -3,7 +3,7 @@
 
 This repository provides a TensorFlow implementation of the following paper:
 > **Deep Recurrent Spatio-Temporal Neural Network for Motor Imagery based BCI**<br>
-> [Wonjun Ko](https://scholar.google.com/citations?user=Fvzg1_sAAAAJ&hl=ko&oi=ao)<sup>1</sup>, [Jee Seok Yoon](https://scholar.google.com/citations?user=YjaJ5qQAAAAJ&hl=ko)<sup>1</sup>, Eunsong Kang<sup>1</sup>, [Eunji Jun](https://scholar.google.com/citations?user=uR6W4TUAAAAJ&hl=ko)<sup>1</sup>, [Jun-Sik Choi](https://scholar.google.com/citations?user=DYTtTzQAAAAJ&hl=ko)<sup>1</sup>, [Heung-Il Suk](https://scholar.google.co.kr/citations?user=dl_oZLwAAAAJ&hl=ko)<sup>1, 2</sup><br/>
+> [Wonjun Ko](https://scholar.google.com/citations?user=Fvzg1_sAAAAJ&hl=ko&oi=ao)<sup>1</sup>, [Jee Seok Yoon](https://scholar.google.com/citations?user=YjaJ5qQAAAAJ&hl=ko)<sup>1</sup>, Eunsong Kang<sup>1</sup>, [Eunji Jun](https://scholar.google.com/citations?user=uR6W4TUAAAAJ&hl=ko)<sup>1</sup>, [Jun-Sik Choi](https://scholar.google.com/citations?user=DYTtTzQAAAAJ&hl=ko)<sup>1</sup>, and [Heung-Il Suk](https://scholar.google.co.kr/citations?user=dl_oZLwAAAAJ&hl=ko)<sup>1, 2</sup><br/>
 > (<sup>1</sup>Department of Brain and Cognitive Engineering, Korea University) <br/>
 > (<sup>2</sup>Department of Artificial Intelligence, Korea University) <br/>
 > Official Version: https://ieeexplore.ieee.org/abstract/document/8311535 <br/>
