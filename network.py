@@ -5,9 +5,12 @@ import tensorflow as tf
 
 def RSTNN(eeg, label, num_channel, num_output, reuse=False, seizure_experiment=False):
     with tf.variable_scope("RSTNN", reuse=reuse):
-        if reuse == True: keep_prob = 1.0
-        else: keep_prob = 0.5
+        if reuse == True: # for the dropout rate
+            keep_prob = 1.0
+        else: 
+            keep_prob = 0.5
 
+        # 1st recurrent spatio-temporal layer
         hidden1 = tf.layers.conv2d(inputs=eeg, filters=16, kernel_size=(1, 9), padding="same", activation=tf.nn.relu)
         hidden1 = tf.layers.batch_normalization(hidden1)
         hidden2 = tf.layers.conv2d(inputs=hidden1, filters=16, kernel_size=(1, 9), padding="same", activation=tf.nn.relu)
@@ -18,6 +21,7 @@ def RSTNN(eeg, label, num_channel, num_output, reuse=False, seizure_experiment=F
         hidden3 = tf.layers.max_pooling2d(hidden3, (1, 4), (1, 4))
         hidden3 = tf.layers.dropout(hidden3, rate=keep_prob)
 
+        # 2nd recurrent spatio-temporal layer
         hidden4 = tf.layers.conv2d(inputs=hidden3, filters=32, kernel_size=(1, 1), padding="same", activation=tf.nn.relu)
         hidden4 = tf.layers.batch_normalization(hidden4)
         hidden5 = tf.layers.conv2d(inputs=hidden4, filters=32, kernel_size=(1, 9), padding="same", activation=tf.nn.relu)
@@ -31,6 +35,7 @@ def RSTNN(eeg, label, num_channel, num_output, reuse=False, seizure_experiment=F
         hidden7 = tf.layers.max_pooling2d(hidden7, (1, 4), (1, 4))
         hidden7 = tf.layers.dropout(hidden7, rate=keep_prob)
 
+        # 3rd recurrent spatio-temporal layer
         hidden8 = tf.layers.conv2d(inputs=hidden7, filters=64, kernel_size=(1, 1), padding="same", activation=tf.nn.relu)
         hidden8 = tf.layers.batch_normalization(hidden8)
         hidden9 = tf.layers.conv2d(inputs=hidden8, filters=64, kernel_size=(1, 9), padding="same", activation=tf.nn.relu)
