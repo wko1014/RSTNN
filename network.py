@@ -1,7 +1,6 @@
 # Import APIs
-import tensorflow as tf
-
-# Tensorflow 1.5-based
+import tensorflow as tf # Tensorflow 1.5-based
+# TODO: update code to TF2.0>!
 
 def RSTNN(eeg, label, num_channel, num_output, reuse=False, seizure_experiment=False):
     with tf.variable_scope("RSTNN", reuse=reuse):
